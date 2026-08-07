@@ -26,9 +26,9 @@
     <div class="nav-mark">will<span class="dot">.</span>oc</div>
     <div class="nav-right">
       <div class="nav-links">
+        <a href="#education">Education</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
-        <a href="#experience" data-tab="education">Education</a>
         <a href="#contact">Contact</a>
       </div>
       <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
@@ -64,19 +64,40 @@
   </div>
 </header>
 
-<section id="experience">
+<section id="education">
   <div class="wrap">
     <div class="section-head">
       <span class="section-num">01</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-mark">W</div>
+      <div>
+        <div class="edu-school">University of Waterloo</div>
+        <div class="edu-program">Statistics, Honours, Co-operative Program — concurrent Applied Mathematics (Scientific Computing & Scientific Machine Learning), Honours</div>
+        <div class="edu-detail">Co-op · five work terms across capital markets desks</div>
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-mark">C</div>
+      <div>
+        <div class="edu-school">University of Chicago</div>
+        <div class="edu-program">Summer Program — Economics</div>
+        <div class="edu-detail">Jul 2022 · Applied Economic Analysis · Experimental Economics Award for best performance in applied economic experimentation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
       <h2 class="section-title">Experience</h2>
     </div>
 
-    <div class="tab-switch" role="tablist">
-      <button class="tab-btn active" data-target="tab-work" role="tab" aria-selected="true" type="button">Work</button>
-      <button class="tab-btn" data-target="tab-education" role="tab" aria-selected="false" type="button">Education</button>
-    </div>
-
-    <div class="tab-panel active" id="tab-work" role="tabpanel">
     <div class="timeline">
 
       <div class="tl-item">
@@ -154,25 +175,13 @@
       </div>
 
     </div>
-    </div>
-
-    <div class="tab-panel" id="tab-education" role="tabpanel">
-      <div class="edu-card">
-        <div class="edu-mark">W</div>
-        <div>
-          <div class="edu-school">University of Waterloo</div>
-          <div class="edu-program">Statistics, Honours, Co-operative Program — concurrent Applied Mathematics (Scientific Computing & Scientific Machine Learning), Honours</div>
-          <div class="edu-detail">Co-op · five work terms across capital markets desks</div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <section id="projects">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-num">02</span>
+      <span class="section-num">03</span>
       <h2 class="section-title">Projects</h2>
     </div>
     <p class="section-sub">Desk tools above are internal — these are public.</p>
@@ -220,6 +229,15 @@
         <div class="card-desc">BMO — Power BI dashboard combining multiple SQL sources (DAX + VBA) to track rolls across bond forwards, repos, and TRS.</div>
         <div class="tag-row"><span class="tag">Power BI</span><span class="tag">DAX</span></div>
       </div>
+
+      <a class="card" href="https://www.janestreet.com/puzzles/archive/" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="card-title">Jane Street Monthly Puzzles</div>
+          <div class="card-arrow">↗</div>
+        </div>
+        <div class="card-desc">Solve Jane Street's monthly quant puzzles for fun. Latest solve: "Pent-Up Frustration 3 / Knight Moves 7" (Jul 2026) — a hybrid polyomino-tiling, knight's-tour, and arithmetic path-constraint problem.</div>
+        <div class="tag-row"><span class="tag">Combinatorics</span><span class="tag">Probability</span></div>
+      </a>
     </div>
   </div>
 </section>
@@ -227,7 +245,7 @@
 <section id="skills">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-num">03</span>
+      <span class="section-num">04</span>
       <h2 class="section-title">Tools</h2>
     </div>
     <div class="skill-groups">
@@ -264,7 +282,7 @@
 <footer id="contact">
   <div class="wrap">
     <div class="section-head">
-      <span class="section-num">04</span>
+      <span class="section-num">05</span>
       <h2 class="section-title">Get in touch</h2>
     </div>
     <div class="contact-title">Always up for talking rates, credit, or a good probability puzzle.</div>

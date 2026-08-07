@@ -8,10 +8,6 @@ const navLinks = document.querySelectorAll(".nav-links a");
 
 const setActive = (id) => {
   navLinks.forEach((link) => {
-    // The "Education" link shares #experience's href (it's a tab-switcher,
-    // not its own scroll target) -- skip it so it doesn't co-highlight
-    // with "Experience" every time that section is in view.
-    if (link.dataset.tab) return;
     link.style.color = link.getAttribute("href") === `#${id}` ? "var(--ink)" : "";
   });
 };
@@ -54,28 +50,3 @@ if (themeToggle) {
     }
   });
 }
-
-// Work / Education tab switcher inside #experience
-const tabButtons = document.querySelectorAll(".tab-btn");
-const tabPanels = document.querySelectorAll(".tab-panel");
-
-const activateTab = (target) => {
-  tabButtons.forEach((b) => {
-    const isMatch = b.dataset.target === target;
-    b.classList.toggle("active", isMatch);
-    b.setAttribute("aria-selected", isMatch ? "true" : "false");
-  });
-  tabPanels.forEach((p) => p.classList.toggle("active", p.id === target));
-};
-
-tabButtons.forEach((btn) => {
-  btn.addEventListener("click", () => activateTab(btn.dataset.target));
-});
-
-// The "Education" nav link scrolls to #experience (native anchor behavior)
-// and also switches to the Education tab.
-document.querySelectorAll(".nav-links a[data-tab]").forEach((link) => {
-  link.addEventListener("click", () => {
-    activateTab(link.dataset.tab === "education" ? "tab-education" : "tab-work");
-  });
-});
