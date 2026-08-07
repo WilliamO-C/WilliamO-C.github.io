@@ -15,13 +15,38 @@
   --accent: #3987e5;
   --accent-dim: #1c5cab;
   --accent-wash: rgba(57, 135, 229, 0.12);
+  --nav-bg: rgba(13, 15, 18, 0.82);
   --mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --serif: "Fraunces", Georgia, serif;
   --max: 920px;
 }
 
+/* Light theme -- same structure, swapped surfaces/ink. Applied via
+   [data-theme="light"] on <html>, set synchronously pre-paint by an inline
+   script in <head> (reading localStorage) so there's no flash of the wrong
+   theme, and toggled at runtime by script.js. */
+html[data-theme="light"] {
+  --bg: #f6f6f3;
+  --bg-raised: #ffffff;
+  --bg-card: #ffffff;
+  --line: #e2e2de;
+  --line-soft: #ececea;
+  --ink: #14171b;
+  --ink-secondary: #4a4d52;
+  --ink-muted: #7b7e84;
+  --accent: #2568c4;
+  --accent-dim: #1a4f9e;
+  --accent-wash: rgba(37, 104, 196, 0.10);
+  --nav-bg: rgba(246, 246, 243, 0.82);
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+body, .card, .btn, .pill, .tag, .fact-strip span, .tl-item, nav,
+.badge-pill, .theme-toggle, .tab-switch, .tab-btn {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
 
 /* CSS-only entrance animation -- runs once on load, never gates visibility
    on JS or scroll state. If animations are disabled/unsupported, elements
@@ -43,6 +68,11 @@
 }
 
 html { scroll-behavior: smooth; }
+
+/* Offset anchor-scroll targets by the sticky nav's height so section
+   headings don't land partially hidden behind it (native anchor clicks
+   and scrollIntoView both respect scroll-margin-top). */
+section[id], header[id], footer[id] { scroll-margin-top: 76px; }
 
 body {
   background: var(--bg);
@@ -83,7 +113,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(13, 15, 18, 0.82);
+  background: var(--nav-bg);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -102,6 +132,7 @@ nav .wrap {
   font-weight: 600;
 }
 .nav-mark .dot { color: var(--accent); }
+.nav-right { display: flex; align-items: center; gap: 22px; }
 .nav-links { display: flex; gap: 28px; }
 .nav-links a {
   font-size: 13.5px;
@@ -111,6 +142,25 @@ nav .wrap {
   transition: color 0.15s ease;
 }
 .nav-links a:hover { color: var(--ink); }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg-raised);
+  color: var(--ink-secondary);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent-dim); }
+.theme-toggle svg { width: 15px; height: 15px; display: block; }
+.theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
 /* ---------- hero ---------- */
 header.hero {
@@ -251,6 +301,53 @@ h2.section-title {
   font-size: 12px;
 }
 
+.tl-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.tl-head .tl-badge { margin-bottom: 3px; }
+.tl-head .tl-firm { margin-bottom: 0; }
+.tl-logo {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+.tl-logo-rbc { background: #0033a0; }
+.tl-logo-bmo { background: #0079c1; }
+.tl-logo-cibc { background: #b10f1d; }
+
+/* ---------- Work / Education tab switch ---------- */
+.tab-switch {
+  display: inline-flex;
+  padding: 4px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  gap: 4px;
+  margin-bottom: 32px;
+}
+.tab-btn {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  padding: 8px 20px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.tab-btn:hover { color: var(--ink-secondary); }
+.tab-btn.active { background: var(--accent); color: #fff; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
 @media (max-width: 640px) {
   .tl-item { grid-template-columns: 1fr; gap: 8px; }
 }
@@ -296,6 +393,33 @@ a.card:hover .card-arrow { color: var(--accent); transform: translate(2px, -2px)
   color: var(--ink-muted);
   margin-top: 14px;
 }
+
+.card-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  margin-bottom: 18px;
+  display: block;
+  background: var(--bg-raised);
+}
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-wash);
+  border: 1px solid var(--accent-dim);
+  border-radius: 20px;
+  padding: 5px 12px 5px 10px;
+}
+.badge-pill svg { width: 11px; height: 11px; flex: 0 0 auto; }
 
 /* ---------- education ---------- */
 .edu-card {
@@ -363,5 +487,19 @@ footer { padding: 70px 0 50px; border-top: 1px solid var(--line); }
 
 @media (max-width: 640px) {
   header.hero { padding: 80px 0 56px; }
-  .nav-links { gap: 16px; }
+  /* Nav overflows on narrow phones (logo + 4 links + theme toggle can't fit
+     one row). Wrap the links+toggle group onto its own row, and let the
+     links scroll horizontally rather than clipping -- the theme toggle
+     stays pinned and always visible either way. */
+  nav .wrap { flex-wrap: wrap; row-gap: 12px; padding-top: 14px; padding-bottom: 14px; }
+  .nav-right { flex: 1 0 100%; justify-content: space-between; }
+  .nav-links {
+    gap: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  /* Nav is two rows tall here, so targets need a bigger offset. */
+  section[id], header[id], footer[id] { scroll-margin-top: 108px; }
 }
