@@ -50,3 +50,22 @@ if (themeToggle) {
     }
   });
 }
+
+// Small Waterloo-specific easter egg: the campus's Canada goose population
+// is a long-running joke among alumni. Shows one random line under the
+// Waterloo entry per page load. Purely cosmetic -- if JS fails the element
+// just stays empty, so there's no broken/missing-content failure mode.
+const gooseJokes = [
+  "Unofficial UWaterloo mascot: the Canada goose. It never signed up for co-op, and it shows.",
+  "Waterloo has more geese than most postal codes have people. Not an exaggeration.",
+  "Four years of algorithms, and the hardest optimization problem was still crossing Ring Road goose-free.",
+  "Officially: Honours Mathematics. Unofficially: a minor in goose de-escalation.",
+  "Every Waterloo grad has a goose story. Ask about mine sometime.",
+  "The geese didn't do a work term — they've had tenure on campus since long before any of us arrived.",
+  "Waterloo taught proofs by contradiction. The geese taught proofs by intimidation.",
+  "Convocation photos at Waterloo come with a coin-flip chance of a goose in the background. Mine had two.",
+];
+const gooseMark = document.getElementById("goose-joke");
+if (gooseMark) {
+  gooseMark.textContent = gooseJokes[Math.floor(Math.random() * gooseJokes.length)];
+}
